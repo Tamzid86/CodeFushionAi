@@ -15,6 +15,20 @@ Then the prject will be ready to use.
 - Any country can be ddeleted.
 - RESTful endpoints built with Django REST Framework.
 
+## Database Setup
+First create a database locally in Postgres. then go to the settings.py in Assignment and provide the relevant information of your own databse.
+Example:
+DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'CodefushionAi',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 ## Backend
 To start the backend, provide the below command after getting inside to the Assignment Directory.
  python manage.py runserver
