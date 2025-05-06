@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .signup-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .alert {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h3 class="text-center mb-4">Create an Account</h3>
+        <div class="alert alert-danger" id="error-message" role="alert"></div>
+        
+        <form id="signup-form">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm your password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        </form>
+
+        <p class="text-center mt-3">
+            Already have an account? <a href="/country-info/login">Login here</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                document.getElementById('error-message').innerText = "Passwords do not match.";
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+
+            // Hide error message if passwords match
+            document.getElementById('error-message').style.display = 'none';
+
+            // Prepare data for API call
+            const data = {
+                username: username,
+                email: email,
+                password1: password,
+                password2: confirmPassword
+            };
+
+            // Send the data to the API
+            try {
+                const res = await fetch('http://127.0.0.1:8000/country-info/api/auth/registration/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    // Show success message
+                    alert('Registration successful!');
+                    window.location.href = "/country-info/login";  // Redirect to login page
+                } else {
+                    const errorData = await res.json();
+                    const errorMessage = errorData.detail || "An error occurred.";
+                    document.getElementById('error-message').innerText = errorMessage;
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            } catch (err) {
+                document.getElementById('error-message').innerText = "An unexpected error occurred.";
+                document.getElementById('error-message').style.display = 'block';
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
