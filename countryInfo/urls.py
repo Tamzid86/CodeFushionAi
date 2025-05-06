@@ -9,5 +9,5 @@ router.register(r'countries', AllDataViewSet)
 urlpatterns= [
     path('api/',include(router.urls)),
     path('fetch-countries/', views.fetch_countries, name='fetch_countries'),
-    
+    path('same-region/<str:country_name>/', views.same_region_countries),
 ]
