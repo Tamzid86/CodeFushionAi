@@ -11,4 +11,5 @@ urlpatterns= [
     path('fetch-countries/', views.fetch_countries, name='fetch_countries'),
     path('same-region/<str:country_name>/', views.same_region_countries),
     path('by-language/<str:language>/', views.countries_by_language),
+    path('search/', views.search_country),
 ]

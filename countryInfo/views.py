@@ -34,3 +34,10 @@ def countries_by_language(request, language):
             countries.append(c)
     serializer=AllDataSerializer(countries, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def search_country(request):
+    query = request.GET.get('q', '')
+    countries = AllData.objects.filter(country_name__icontains=query)
+    serializer = AllDataSerializer(countries, many=True)
+    return Response(serializer.data)
