@@ -1,0 +1,48 @@
+## Installation
+After fetching the whole project, install the requirements by using " pip install -r requirements.txt " command. 
+then provide these two commands,
+  python manage.py makemigrations
+  python manage.py migrate
+
+Then the prject will be ready to use.
+
+## Features
+- User registration and login using Django’s built-in auth system (session-based).
+- Protected API views for authenticated users.
+- List of all countires were fetched.
+- Country search by name, region, or language.
+- Countries information can be updated.
+- Any country can be ddeleted.
+- RESTful endpoints built with Django REST Framework.
+
+## Backend
+To start the backend, provide the below command after getting inside to the Assignment Directory.
+ python manage.py runserver
+First a user need to register through this api,
+  http://127.0.0.1:8000/country-info/api/auth/registration/
+    in the body, username, password1, password2 and email have to be given. password1 and password2 should be same.
+Then the user will login though this api,
+  http://127.0.0.1:8000/country-info/api/auth/login
+    in the body, username and password have to be passed. the user then will get access token which have to provide with all the further reqests as a bearer token.
+There are several APIs ensuring all the required functionalities.
+1. http://127.0.0.1:8000/country-info/countries/
+    (GET request)This api retrives all the information of all countires.
+2. http://127.0.0.1:8000/country-info/countries/<id>
+     (GET request)This api fetches the specific country's all data with this id.
+3. http://127.0.0.1:8000/country-info/countries
+     (POST method) This api creates a new coutry where all the information of a country need to be passes through body.
+4. http://127.0.0.1:8000/country-info/countries/<id>
+    (PUT method) this api updates the information of a country. the updated information have to be given in the body.
+5. http://127.0.0.1:8000/country-info/countries/<id>
+     (DELETE method) this api deletes all the information of a specific country with the given id.
+6. http://127.0.0.1:8000/country-info/countries/same-region/<country_name>/
+    (GET method) this api retrives all the countries of the same region.
+7. http://127.0.0.1:8000/country-info/countries/by-language/<language>/
+  (GET method) this api retrives all the countries with the same language.
+8.http://127.0.0.1:8000/country-info/search/q=<country name(full or partial)
+  (GET method) this api retrives the desire country data.
+
+## Frontend
+After starting the backend, go to this url,
+  http://127.0.0.1:8000/country-info/signup/
+This will take us to the signup page.
