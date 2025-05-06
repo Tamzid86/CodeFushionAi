@@ -24,3 +24,13 @@ def same_region_countries(request, country_name):
         return Response(serializer.data)
     except AllData.DoesNotExists:
         return Response({'error':'Country not found'}, status=404)
+
+@api_view(['GET'])
+def countries_by_language(request, language):
+    countries = []
+    for c in AllData.objects.all():
+        languages= c.full_data.get('languages',{})
+        if language.lower() in [v.lower() for v in languages.values()]:
+            countries.append(c)
+    serializer=AllDataSerializer(countries, many=True)
+    return Response(serializer.data)
