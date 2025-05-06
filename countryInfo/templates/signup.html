@@ -25,12 +25,13 @@
             box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #380608;
+            border-color: #fefefe;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #fefefe;
+            border-color: #380608;
+            color: #380608;
         }
         .alert {
             display: none;
@@ -40,7 +41,7 @@
 <body>
 
     <div class="signup-container">
-        <h3 class="text-center mb-4">Create an Account</h3>
+        <h3 class="text-center" style="color:#380608; margin-bottom: 1.5rem;">Create an Account</h3>
         <div class="alert alert-danger" id="error-message" role="alert"></div>
         
         <form id="signup-form">
@@ -72,23 +73,19 @@
         document.getElementById('signup-form').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            // Collect form data
             const username = document.getElementById('username').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
 
-            // Validate password match
             if (password !== confirmPassword) {
                 document.getElementById('error-message').innerText = "Passwords do not match.";
                 document.getElementById('error-message').style.display = 'block';
                 return;
             }
 
-            // Hide error message if passwords match
             document.getElementById('error-message').style.display = 'none';
 
-            // Prepare data for API call
             const data = {
                 username: username,
                 email: email,
@@ -96,7 +93,6 @@
                 password2: confirmPassword
             };
 
-            // Send the data to the API
             try {
                 const res = await fetch('http://127.0.0.1:8000/country-info/api/auth/registration/', {
                     method: 'POST',
@@ -107,9 +103,8 @@
                 });
 
                 if (res.ok) {
-                    // Show success message
                     alert('Registration successful!');
-                    window.location.href = "/country-info/login";  // Redirect to login page
+                    window.location.href = "/country-info/login";  
                 } else {
                     const errorData = await res.json();
                     const errorMessage = errorData.detail || "An error occurred.";

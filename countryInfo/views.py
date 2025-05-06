@@ -30,7 +30,7 @@ def fetch_countries(request):
 class AllDataViewSet(viewsets.ModelViewSet):
     queryset= AllData.objects.all()
     serializer_class= AllDataSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -93,7 +93,6 @@ class SignupSerializer(serializers.Serializer):
         )
         return user
 
-# API View for signup
 class SignupView(APIView):
     permission_classes = [AllowAny]
 

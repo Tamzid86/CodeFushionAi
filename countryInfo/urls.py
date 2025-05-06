@@ -11,7 +11,7 @@ router.register(r'countries', AllDataViewSet)
 
 urlpatterns= [
     path('api/auth/', include('dj_rest_auth.urls')),  # Handles login and logout
-    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),  # Handles signup
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),  
  
 
     path('api/',include(router.urls)),

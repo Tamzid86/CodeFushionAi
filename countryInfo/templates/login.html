@@ -25,12 +25,13 @@
             box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
         }
         .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
+            background-color: #380608;
+            border-color: #fefefe;
         }
         .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+            background-color: #fefefe;
+            border-color: #380608;
+            color: #380608;
         }
         .alert {
             display: none;
@@ -40,7 +41,7 @@
 <body>
 
     <div class="login-container">
-        <h3 class="text-center mb-4">Login</h3>
+        <h3 class="text-center mb-4" style="color:#380608; margin-bottom: 1.5rem;">  Login</h3>
         <div class="alert alert-danger" id="error-message" role="alert"></div>
 
         <form id="login-form">
@@ -56,7 +57,7 @@
         </form>
 
         <p class="text-center mt-3">
-            Don't have an account? <a href="/signup/">Register here</a>
+            Don't have an account? <a href="/country-info/signup/">Register here</a>
         </p>
     </div>
 
@@ -85,7 +86,7 @@
 
                 if (res.ok) {
                     alert('Login successful!');
-                    window.location.href = "/dashboard/"; // Change as needed
+                    window.location.href = "/country-info/countries"; 
                 } else {
                     let errorMsg = "";
                     for (let key in result) {
